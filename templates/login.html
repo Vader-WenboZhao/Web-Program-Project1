@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+    <code> User: {{ user_use }} </code>
+
+    <h1> You haven't logged in yet, please login first</h1>
+
+    <form action="{{ url_for('login') }}" method="post">
+        <div class="form-group">
+            <input class="form-control" name="input_username" placeholder="Username">
+            <!-- <input class="form-control" name="name" placeholder="..."> -->
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" name="input_password" placeholder="Password">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Login</button>
+        </div>
+
+    </form>
+
+    <form action="{{ url_for('homepage_jump') }}" method="post">
+        <div class="form-group">
+            <button class="btn btn-primary">Homepage</button>
+        </div>
+    </form>
+
+{% endblock %}

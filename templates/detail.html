@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Details
+{% endblock %}
+
+{% block body %}
+    <code> User: {{ user_use }} </code>
+
+    <h1>Title: {{ title }}</h1>
+    <!--
+    <p>
+        ISBN: <code>{{ isbn }}</code><br>
+        Author name: <i>{{ author }}</i><br>
+        Public year: {{ year }}<br>
+    </p>
+    -->
+
+    <form action="{{ url_for('write_review') }}" method="post">
+        <p>
+            <div class="form-group">
+                ISBN: <code><input value="{{ isbn }}" name="selected_isbn" readonly="readonly"></code>
+            </div>
+            Author name: <i>{{ author }}</i><br>
+            Public year: {{ year }}<br>
+            Review count: {{ count }}<br>
+        </p>
+
+        <div class="form-group">
+            Select your star rate:
+            <select class="form-control" name="input_star">
+                {% for num in [1,2,3,4,5] %}
+                    <option value="{{ num }}">{{ num }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            Write down your review: <input class="form-control" name="input_review" placeholder="Input your review here">
+        </div>
+
+        <button class="btn btn-primary">Review</button>
+    </form>
+
+    <form action="{{ url_for('homepage_jump') }}" method="post">
+        <div class="form-group">
+            <button class="btn btn-primary">Homepage</button>
+        </div>
+    </form>
+
+    <br>
+    <form action="{{ url_for('logout') }}" method="post">
+        <div class="form-group">
+            <button class="btn btn-primary">Logout</button>
+        </div>
+    </form>
+
+    <h2><br>Reviews:</h2>
+    {% for r in review_results %}
+        <li> Star rate: <b>{{ r.star }}</b> |  Review: <code>{{ r.review }}</code></li>
+    {% endfor %}
+
+{% endblock %}
